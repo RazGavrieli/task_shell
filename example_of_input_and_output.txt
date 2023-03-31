@@ -1,0 +1,102 @@
+raz.gavrieli@PSIL-MBP-033 task_shell % ./myshell
+hello: ls
+Makefile        a.out           if.sh           key.c           myfile          original3.c     shell2.c        shell3.c        task1.pdf
+README.md       colors.txt      input.txt       mydir           myshell         shell1.c        shell3          shell3.dSYM     test
+hello: ls
+Makefile        a.out           if.sh           key.c           myfile          original3.c     shell2.c        shell3.c        task1.pdf
+README.md       colors.txt      input.txt       mydir           myshell         shell1.c        shell3          shell3.dSYM     test
+hello: cd mydir
+hello: date –u >> myfile
+date: illegal time format
+usage: date [-jnRu] [-r seconds|file] [-v[+|-]val[ymwdHMS]]
+            [-I[date | hours | minutes | seconds]]
+            [-f fmt date | [[[mm]dd]HH]MM[[cc]yy][.ss]] [+format]
+hello: date -u >> myfile
+hello: cat myfile
+Fri Mar 31 16:04:35 UTC 2023
+hello: wc -l < myfile
+wc: <: open: No such file or directory
+       1 myfile
+       1 total
+hello: prompt = hi;
+hi; ls
+file    file1   file2   file3   myfile
+hi; pwd
+/Users/raz.gavrieli/personalProjects/advancedProgramming/task_shell/mydir
+hi; ls no_such_file 2> file
+hi; cat file
+ls: no_such_file: No such file or directory
+hi; ^CYou typed Control-C!
+cat > colors.txt
+blue
+black
+red
+red
+green
+blue
+green
+red
+red
+blue
+hi; ls
+colors.txt      file            file1           file2           file3           myfile
+hi; cat colors.txt
+blue
+black
+red
+red
+green
+blue
+green
+red
+red
+blue
+hi; cat colors.txt | cat | cat | cat
+blue
+black
+red
+red
+green
+blue
+green
+red
+red
+blue
+hi; sort colors.txt | uniq –c | sort –r | head -3
+uniq: –c: No such file or directory
+sort: No such file or directory
+hi; sort colors.txt 
+black
+blue
+blue
+blue
+green
+green
+red
+red
+red
+red
+hi; sort colors.txt | uniq -c | sort -r | head -3
+   4 red
+   3 blue
+   2 green
+hi; ls
+colors.txt      file            file1           file2           file3           myfile
+hi; cd ..
+hi; ls
+Makefile        a.out           if.sh           key.c           myfile          original3.c     shell2.c        shell3.c        task1.pdf
+README.md       colors.txt      input.txt       mydir           myshell         shell1.c        shell3          shell3.dSYM     test
+hi; prompt = hello:
+hello: ls
+Makefile        a.out           if.sh           key.c           myfile          original3.c     shell2.c        shell3.c        task1.pdf
+README.md       colors.txt      input.txt       mydir           myshell         shell1.c        shell3          shell3.dSYM     test
+hello: ls | grep text
+hello: ls | grep txt
+colors.txt
+input.txt
+hello: ls -a | grep c | grep shell | grep 3
+shell3.c
+hello: echo test > test.txt
+test > test.txt 
+hello: ^CYou typed Control-C!
+quit
