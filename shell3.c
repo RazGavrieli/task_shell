@@ -40,7 +40,7 @@ void sig_handler(int signum)
 
 
 //int main() {
-int main(int argc, char *argv[]) {
+int main(int argCOUNT, char *argVARIABLES[]) {
     
 
 signal(SIGINT, sig_handler);
@@ -59,11 +59,11 @@ int fd, amper, redirect, redirectAppend, redirecterr, piping, retid, status, arg
 int fildes[2];
 char *argv1[10], *argv2[10];
 char prompt[PROMPTMAXSIZE];
-strcpy(prompt, "hello");
+strcpy(prompt, "hello:");
 
 // if we got an argument, define debugging mode
-if (argc > 1) {
-    if (!strcmp(argv[1], "-d")) {
+if (argCOUNT > 1) {
+    if (!strcmp(argVARIABLES[1], "-d")) {
         printf("Debugging mode is on.\n");
         DEBUG = 1;
     }
@@ -79,7 +79,7 @@ while (1)
     }
     /* Get input if we are not using arrow keys*/
     if (!commandPointer)
-        printf("%s: ", prompt);
+        printf("%s ", prompt);
     fgets(command, 1024, stdin);
     /* if command is null */
     if (command[0] == '\n') {
@@ -166,7 +166,7 @@ while (1)
     /* Is command exit */
     else if (!strcmp(argv1[0], "quit")) {
         printf("\n"); 
-        exit(0);
+        return 0;
     }
     /* Is command cd */
     else if (!strcmp(argv1[0], "cd")) {
@@ -318,24 +318,18 @@ while (1)
             /* stderr is now redirected */
         }
         if (piping) {
-            // i = ??
-            // printf("Piping...\n");
             while (piping > 0) {
-                // argv1 = something;
-                // argv2 = something;
                 if (pipe(fildes) == -1) {
                     perror("Pipe:");
                 }
                 int first_proc_pid = fork();
                 if (first_proc_pid == 0) {
                     /* first component of command line */
-                    printf("first child process\n");
+                    //printf("first child process\n");
                     close(STDOUT_FILENO); // 1
                     /* Duplicate the output side of pipe to stdout */
                     dup(fildes[1]);
-                    printf("pipeline fd duplicated to stdout!\n");
-                    // printf("fildes[0]: %d\n", fildes[0]);
-                    // printf("fildes[1]: %d\n", fildes[1]);
+                    //printf("pipeline fd duplicated to stdout!\n");
                     close(fildes[1]);
                     close(fildes[0]);
                     /* stdout now goes to pipe */ 
